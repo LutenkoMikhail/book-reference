@@ -27,6 +27,9 @@ Livewire для Ajax запросов
 - добавление автора или книги
 - удаление автора или книги
 
+https://laravel-livewire.com/docs/file-uploads#basic
+https://github.com/asantibanez?tab=repositories
+
 https://lightit.io/blog/laravel-livewire-shopping-cart-demo/
 https://www.codechief.org/article/laravel-livewire-laravel-livewire-crud-tutorial#gsc.tab=0
 

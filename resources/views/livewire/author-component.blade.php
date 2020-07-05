@@ -51,9 +51,9 @@
     {{ $authors->links() }}
     @else
         <h1>
-            Not Authors
+            Not Authors !
         </h1>
-        @endif
+    @endif
 
 </div>
 
