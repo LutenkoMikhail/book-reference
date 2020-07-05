@@ -1,4 +1,6 @@
 <div>
+    @if (count($authors))
+
     <h1>
         All Authors:
     </h1>
@@ -47,6 +49,12 @@
         </tbody>
     </table>
     {{ $authors->links() }}
+    @else
+        <h1>
+            Not Authors
+        </h1>
+        @endif
+
 </div>
 
 

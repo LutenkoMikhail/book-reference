@@ -16,6 +16,9 @@ class authorcomponent extends Component
 
     public $selectedId;
     public $updateMode = false;
+    public $sortMethod = 'asc';
+    public $sortField = 'surname';
+    public $countPaginate = 15;
 
     private function clearInputForm()
     {
@@ -26,7 +29,7 @@ class authorcomponent extends Component
 
     public function render()
     {
-        $authors = Author::paginate(15);
+        $authors = Author::orderBy($this->sortField, $this->sortMethod)->paginate($this->countPaginate);
 
         return view('livewire.author-component',
             ['authors' => $authors]);

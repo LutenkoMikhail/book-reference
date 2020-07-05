@@ -8,7 +8,10 @@ class Book extends Model
 {
     public function authors()
     {
-        return $this->belongsToMany(Book::class, 'author_books', 'author_id', 'book_id')
+        return $this->belongsToMany(Author::class,
+            'author_books',
+            'book_id',
+            'author_id')
             ->withTimestamps();
     }
 }
