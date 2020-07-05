@@ -6,7 +6,6 @@ use App\Author;
 use Faker\Generator as Faker;
 
 $factory->define(Author::class, function (Faker $faker) {
-
     return [
         'surname' => $faker->LastName,
         'name' => $faker->firstName,

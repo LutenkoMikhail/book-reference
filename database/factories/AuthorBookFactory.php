@@ -7,10 +7,7 @@ use App\AuthorBook;
 use App\Book;
 use Faker\Generator as Faker;
 
-$factory->define(AuthorBook::class, function ($bookId,$authorId) {
-//    $authorId = Author::all()->random()->id;
-//    $bookId = Book::all()->random()->id;
-
+$factory->define(AuthorBook::class, function ($bookId, $authorId) {
     return [
         'author_id' => $authorId,
         'book_id' => $bookId
