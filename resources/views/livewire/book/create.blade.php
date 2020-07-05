@@ -5,9 +5,9 @@
     <div class="mb-8">
         <label class="inline-block w-32 font-bold">Authors:</label>
         <select multiple="multiple" name="authors []" wire:model="authors" class="border shadow p-2 bg-white">
-{{--            <option value=''>Choose a authors</option>--}}
             @foreach($authorsAll as $author)
-                <option value={{ $author->id }}>{{ $author->surname.' '.$author->name.' '.$author->patronymic }}</option>
+                <option
+                    value={{ $author->id }}>{{ $author->surname.' '.$author->name.' '.$author->patronymic }}</option>
             @endforeach
         </select>
     </div>
@@ -30,7 +30,6 @@
 
         @if ($thumbnail)
             <h3>Photo Preview:</h3>
-{{--            <img src="{{ $thumbnail->temporaryUrl() }}">--}}
             <img src="{{  $thumbnail->temporaryUrl() }}" height="280" width="250" class="card-img-top"
                  style="max-width: 45%; margin: 0 auto; display: block;">
         @endif
@@ -40,14 +39,5 @@
         @error('thumbnail') <span class="error">{{ $message }}</span> @enderror
 
         <button wire:click="store()" class="btn btn-primary">Add Book</button>
-{{--        <button type="submit">Save Photo</button>--}}
     </form>
-
-
-
-
-
-
-
-
 </div>

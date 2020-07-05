@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Author;
 use App\Book;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -59,7 +60,6 @@ class bookcomponent extends Component
             "/images/books",
             'public'
         );
-//        dd($this->authors);
 
         $book = Book::create([
             'name' => $this->name,
@@ -79,4 +79,59 @@ class bookcomponent extends Component
         $this->clearInputForm();
     }
 
+    public function edit($idBook)
+    {
+        $book = Book::findorFail($idBook);
+        $this->selectedId = $idBook;
+        $this->name = $book->name;
+        $this->description = $book->description;
+        $this->date_publication = $book->date_publication;
+        $this->thumbnail = '';
+        $this->updateMode = true;
+    }
+
+    public function update()
+    {
+        $this->validate([
+            'name' => 'required|min:3 | max:100',
+            'description' => ' max:100',
+            'thumbnail' => 'required|image|max:2048',
+            'date_publication' => 'required|digits:4|integer|min:1901|max:2155',
+            'authors' => 'required',
+        ]);
+        $pathThumbnail = $this->thumbnail->store(
+            "/images/books",
+            'public'
+        );
+        Storage::delete($this->thumbnail);
+        if ($this->selectedId) {
+            $book = Book::find($this->selectedId);
+            $book->authors()->detach();
+            $book->update([
+                'name' => $this->name,
+                'description' => $this->description,
+                'date_publication' => $this->date_publication,
+                'thumbnail' => $pathThumbnail
+            ]);
+            if ($book !== false) {
+                foreach ($this->authors as $authorID) {
+                    $book->authors()->attach(
+                        $authorID
+                    );
+                }
+            }
+
+        }
+        $this->clearInputForm();
+        $this->updateMode = false;
+    }
+
+    public function destroy($idBook)
+    {
+        if ($idBook) {
+            $book = Book::find($idBook);
+            Storage::delete($book->thumbnail);
+            $book->delete();
+        }
+    }
 }
